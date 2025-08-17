@@ -1,0 +1,133 @@
+{% extends  'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; padding: 2rem 0;">
+        <div class="col-md-8 col-lg-6">
+            <form action="{% url 'create' %}" class="p-5 shadow-lg rounded-3" method="post" enctype="multipart/form-data" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
+                {% csrf_token %}
+                
+                <!-- Header Section -->
+                <div class="text-center mb-4">
+                    <h2 class="text-white fw-bold mb-2">
+                        <i class="fas fa-edit me-2"></i>Create New Blog
+                    </h2>
+                    <p class="text-white-50 mb-0">Share your thoughts with the world</p>
+                </div>
+
+                <!-- Title Field -->
+                <div class="mb-4">
+                    <label for="postname" class="form-label text-white fw-semibold">
+                        <i class="fas fa-heading me-2"></i>Blog Title
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-0">
+                            <i class="fas fa-pen text-primary"></i>
+                        </span>
+                        <input type="text" class="form-control border-0" name="postname" id="postname" 
+                               placeholder="Enter your blog title..." required 
+                               style="border-radius: 0 0.375rem 0.375rem 0;">
+                    </div>
+                </div>
+
+                <!-- Content Field -->
+                <div class="mb-4">
+                    <label for="content" class="form-label text-white fw-semibold">
+                        <i class="fas fa-align-left me-2"></i>Blog Content
+                    </label>
+                    <textarea class="form-control border-0" name="content" id="content" 
+                              rows="6" placeholder="Write your blog content here..." required
+                              style="resize: vertical; min-height: 120px;"></textarea>
+                </div>
+
+                <!-- Category Field -->
+                <div class="mb-4">
+                    <label for="category" class="form-label text-white fw-semibold">
+                        <i class="fas fa-tags me-2"></i>Category
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-0">
+                            <i class="fas fa-folder text-primary"></i>
+                        </span>
+                        <input type="text" class="form-control border-0" name="category" id="category" 
+                               placeholder="e.g., Technology, Travel, Food..." required
+                               style="border-radius: 0 0.375rem 0.375rem 0;">
+                    </div>
+                </div>
+
+                <!-- Image Upload Field -->
+                <div class="mb-4">
+                    <label for="image" class="form-label text-white fw-semibold">
+                        <i class="fas fa-image me-2"></i>Blog Image
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-0">
+                            <i class="fas fa-upload text-primary"></i>
+                        </span>
+                        <input type="file" class="form-control border-0" name="image" id="image" 
+                               accept="image/*" style="border-radius: 0 0.375rem 0.375rem 0;">
+                    </div>
+                    <small class="text-white-50">Upload an image to make your blog more engaging</small>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-light btn-lg fw-bold text-primary border-0" 
+                            style="background: linear-gradient(45deg, #ffffff, #f8f9fa); transition: all 0.3s ease;">
+                        <i class="fas fa-paper-plane me-2"></i>Publish Blog
+                    </button>
+                </div>
+
+                <!-- Messages -->
+                {% for message in messages %}
+                <div class="alert alert-danger mt-3 border-0" role="alert" 
+                     style="background: rgba(220, 53, 69, 0.1); border-left: 4px solid #dc3545;">
+                    <i class="fas fa-exclamation-triangle me-2"></i>{{message}}
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+        border-color: #ffffff;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .shadow-lg {
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    }
+    
+    .rounded-3 {
+        border-radius: 0.5rem !important;
+    }
+    
+    /* Custom scrollbar for textarea */
+    textarea::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    textarea::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+    
+    textarea::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 4px;
+    }
+    
+    textarea::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+</style>
+
+{% endblock %}
